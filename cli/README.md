@@ -1,5 +1,11 @@
 # Command-Line Tools
 
+This is a work in progress.
+
+It does NOT have the functionality to pull dependencies yet.
+
+## Usage
+
 Run these scripts as Python modules from the `godot_addon_manager` repository
 root. Module invocation ensures package-relative imports work correctly.
 
