@@ -1,7 +1,7 @@
 import argparse
 
-from .addons_directory import addons_directory
 from .internal.manifest import Manifest
+from .internal.manifest_path import manifest_path
 from .internal.read_manifest import read_manifest
 
 
@@ -32,8 +32,14 @@ def main() -> None:
     parser.add_argument("name", help="Name of the addon to inspect.")
     args = parser.parse_args()
 
-    manifest_path = addons_directory() / args.name / "manifest.json"
-    print(format_manifest(read_manifest(manifest_path)))
+    try:
+        path = manifest_path(args.name)
+    except FileNotFoundError:
+        parser.error(
+            f"addon {args.name!r} does not exist or has no manifest.json"
+        )
+
+    print(format_manifest(read_manifest(path)))
 
 
 if __name__ == "__main__":
