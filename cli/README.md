@@ -28,3 +28,39 @@ Use `--help` with commands that accept arguments:
 ```bash
 python -m cli.inspect --help
 ```
+
+## Commands
+
+### [find_addons_directory.py](find_addons_directory.py)
+
+```text
+na
+```
+
+### [inspect.py](inspect.py)
+
+```text
+usage: python -m cli.inspect [-h] name
+
+Inspect an addon's manifest.
+
+positional arguments:
+  name        Name of the addon to inspect.
+
+options:
+  -h, --help  show this help message and exit
+```
+
+### [validate.py](validate.py)
+
+```text
+usage: python -m cli.validate [-h] name
+
+Validate an addon's manifest.
+
+positional arguments:
+  name        Name of the addon to validate.
+
+options:
+  -h, --help  show this help message and exit
+```
