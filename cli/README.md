@@ -12,6 +12,7 @@ root. Module invocation ensures package-relative imports work correctly.
 ```bash
 python -m cli.find_addons_directory
 python -m cli.inspect <addon_name>
+python -m cli.validate <addon_name>
 ```
 
 `find_addons_directory` prints the resolved path to the Godot project's
@@ -23,6 +24,8 @@ example:
 ```bash
 python -m cli.inspect godot_addon_manager
 ```
+
+`validate` checks the named addon's manifest format and data.
 
 Use `--help` with commands that accept arguments:
 

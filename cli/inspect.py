@@ -3,6 +3,9 @@ import argparse
 from .internal.manifest import Manifest
 from .internal.manifest_path import manifest_path
 from .internal.read_manifest import read_manifest
+from .internal.validate_manifest_file_format import (
+    validate_manifest_file_format,
+)
 
 
 def format_manifest(manifest: Manifest) -> str:
@@ -32,12 +35,10 @@ def main() -> None:
     parser.add_argument("name", help="Name of the addon to inspect.")
     args = parser.parse_args()
 
-    try:
-        path = manifest_path(args.name)
-    except FileNotFoundError:
-        parser.error(
-            f"addon {args.name!r} does not exist or has no manifest.json"
-        )
+    path = manifest_path(args.name)
+    errors = validate_manifest_file_format(path)
+    if errors:
+        parser.error("\n".join(errors))
 
     print(format_manifest(read_manifest(path)))
 

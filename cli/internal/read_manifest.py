@@ -2,14 +2,20 @@
 
 import json
 from pathlib import Path
+from typing import Any, cast
 
 from .manifest import Dependency, Manifest
 
 
+def load_manifest_data(path: str | Path) -> object:
+    """Load and return the raw JSON value from a manifest file."""
+    with Path(path).open(encoding="utf-8") as manifest_file:
+        return json.load(manifest_file)
+
+
 def read_manifest(path: str | Path) -> Manifest:
     """Read a JSON manifest at path into the in-memory representation."""
-    with Path(path).open(encoding="utf-8") as manifest_file:
-        data = json.load(manifest_file)
+    data = cast(dict[str, Any], load_manifest_data(path))
 
     dependencies = {
         name: Dependency(
